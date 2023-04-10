@@ -1,0 +1,8 @@
+rootProject.name = 'LifePlanner'
+include 'life-planner-service'
+include 'notes-service'
+include 'user-service'
+include 'user-service'
+include 'auth-service'
+include 'gateaway-service'
+

@@ -1,0 +1,6 @@
+CREATE DATABASE lifeplanner;
+    \connect lifeplanner;
+CREATE SCHEMA IF NOT EXISTS "user";
+CREATE SCHEMA IF NOT EXISTS "notes";
+CREATE SCHEMA IF NOT EXISTS "lifeplanner";
+CREATE SCHEMA IF NOT EXISTS "gateway";

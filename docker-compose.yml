@@ -1,0 +1,67 @@
+version: "3"
+services:
+  db:
+    image: postgres:15.1
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: "postgres_password"
+      POSTGRES_DB: postgres
+    volumes:
+      - ./postgres/create_data_base.sql:/docker-entrypoint-initdb.d/create_data_base.sql
+      - pgdata:/var/lib/postgresqldb/data
+    ports:
+      - "5433:5432"
+
+  life-planner-service:
+    build: ./life-planner-service
+    container_name: life-planner-service
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/life-planner?currentSchema=life-planner
+      DB_USER: postgres_user
+      DB_PASSWORD: "postgres_password"
+    depends_on:
+      - db
+
+  gateaway-service:
+    build: ./gateaway-service
+    container_name: gateaway-service
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/life-planner?currentSchema=gateaway
+      DB_USER: postgres_user
+      DB_PASSWORD: "postgres_password"
+    depends_on:
+      - db
+
+  notes-service:
+    build: ./notes-service
+    container_name: notes-service
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/life-planner?currentSchema=notes
+      DB_USER: postgres_user
+      DB_PASSWORD: "postgres_password"
+    depends_on:
+      - db
+
+  user-service:
+    build: ./user-service
+    container_name: user-service
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/life-planner?currentSchema=user
+      DB_USER: postgres_user
+      DB_PASSWORD: "postgres_password"
+    depends_on:
+      - db
+
+  auth-service:
+    build: ./auth-service
+    container_name: auth-service
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/life-planner?currentSchema=auth
+      DB_USER: postgres_user
+      DB_PASSWORD: "postgres_password"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:

@@ -4,3 +4,7 @@ plugins {
 repositories {
     mavenCentral()
 }
+
+bootJar {
+    archiveFileName = "${project.name}.jar"
+}

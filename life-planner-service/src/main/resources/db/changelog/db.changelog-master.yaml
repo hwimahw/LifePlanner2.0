@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: /20232908-1/create-main-direction-table.yaml
+      relativeToChangelogFile: true

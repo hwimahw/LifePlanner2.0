@@ -8,3 +8,6 @@ repositories {
 bootJar {
     archiveFileName = "${project.name}.jar"
 }
+
+dependencies {
+}

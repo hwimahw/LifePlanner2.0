@@ -1,6 +1,47 @@
 plugins {
     id 'java'
+    id "org.openapi.generator" version "${openApiGeneratorVersion}"
 }
+
+openApiGenerate {
+    inputSpec = "$project.rootDir/life-planner-service/src/main/resources/openapi/api-docs.yml".toString()
+    outputDir = "$buildDir/generated/openapi"
+    generateModelDocumentation = true
+    generatorName = "spring"
+    library = "spring-boot"
+    apiPackage = "com.dhabits.code.lifeplanner.lifeplanner.controller"
+    modelPackage = "com.dhabits.code.lifeplanner.lifeplanner.dto"
+    invokerPackage = "com.dhabits.code.lifeplanner.lifeplanner.api"
+//    importMappings = []
+    configOptions = [
+            useSpringBoot3: "true",
+            useTags: "true",
+            java8: "false",
+            dateLibrary: "java8",
+            interfaceOnly: "true",
+            skipDefaultInterface: "true",
+            hideGenerationTimestamp: "true",
+            serializableModel: "true",
+            booleanGetterPrefix: "is",
+            openApiNullable: "true",
+    ]
+}
+
+sourceSets  {
+    main {
+        java {
+            srcDir("${openApiGenerate.outputDir.get()}/src/main/java")
+        }
+    }
+}
+
+tasks.compileJava.dependsOn(tasks.openApiGenerate)
+
+dependencies {
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openApiUiVersion}"
+    implementation "org.liquibase:liquibase-core"
+}
+
 repositories {
     mavenCentral()
 }

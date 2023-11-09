@@ -3,6 +3,7 @@ package com.dhabits.code.lifeplanner.lifeplanner.db.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -23,14 +24,16 @@ import java.util.UUID;
 public class Subdirection {
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(generator = "UUID")
     private UUID id;
 
     @Column(name = "name")
     String name;
 
+    @Column(name = "parentId")
+    UUID parentId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "main_direction_id")
     private MainDirection mainDirection;
-
 }

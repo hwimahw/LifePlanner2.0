@@ -14,6 +14,7 @@ ext {
     postgresVersion = "42.5.3"
     openApiGeneratorVersion = "6.3.0"
     openApiUiVersion = "2.0.2"
+    openApiToolsVersion = "0.2.4"
 }
 
 subprojects { ->

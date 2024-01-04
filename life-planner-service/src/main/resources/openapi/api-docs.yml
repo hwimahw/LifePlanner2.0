@@ -5,29 +5,32 @@ info:
 servers:
   - url: http://localhost:8080/api/customer
 tags:
-  - name: LifePlanner
-    description: LifePlanner API
+  - name: MainDirection
+    description: MainDirection API
 paths:
-  /v1/problem:
+  /v1/mainDirection:
     post:
-      operationId: createProblem
-      summary: Create new problem
+      operationId: createMainDirections
+      summary: Create new main directions
       tags:
-        - LifePlanner
+        - MainDirection
       requestBody:
-        description: Problem create request
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateProblemDto'
+              type: array
+              items:
+                $ref: '#/components/schemas/MainDirectionDto'
         required: true
       responses:
         '201':
-          description: Problem was created
+          description: Main directions were created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IssueId'
+                type: array
+                items:
+                  $ref: '#/components/schemas/MainDirectionDto'
         '400':
           description: Invalid request
           content:
@@ -74,18 +77,31 @@ components:
           type: string
           description: Trace Id
 
-    CreateProblemDto:
+    MainDirectionDto:
       type: object
       properties:
-        problemName:
+        name:
           type: string
-          maxLength: 256
           nullable: false
-          description: Problem name
+          description: Name of main direction
+        subdirections:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubdirectionDto'
+        idf:
+          type: integer
 
-    IssueId:
-      type: string
-
+    SubdirectionDto:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: false
+          description: Name of subdirection
+        parentIdf:
+          type: integer
+        idf:
+          type: integer
 
 security:
   - bearerAuth: [ ]

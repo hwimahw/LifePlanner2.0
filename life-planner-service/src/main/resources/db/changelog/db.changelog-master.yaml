@@ -1,4 +1,7 @@
 databaseChangeLog:
   - include:
-      file: /20232908-1/create-main-direction-table.yaml
+      file: /20230829-1/create-main-direction-table.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: /20231229-1/create-subdirection-table.yaml
       relativeToChangelogFile: true

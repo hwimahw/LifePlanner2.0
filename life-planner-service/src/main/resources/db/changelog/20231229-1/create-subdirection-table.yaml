@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20231229-1
+      author: Irzakhanov Mansur
+      changes:
+        - createTable:
+            tableName: subdirection
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: parent_idf
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: idf
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: main_direction_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_subdirection_main_direction
+                    references: main_direction(id)
+                    nullable: false

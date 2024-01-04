@@ -15,6 +15,7 @@ ext {
     openApiGeneratorVersion = "6.3.0"
     openApiUiVersion = "2.0.2"
     openApiToolsVersion = "0.2.4"
+    mapStructVersion = "1.5.3.Final"
 }
 
 subprojects { ->
@@ -32,6 +33,10 @@ subprojects { ->
         implementation "org.springframework.boot:spring-boot-starter-web"
         implementation "org.springframework.boot:spring-boot-starter-data-jpa"
         compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor 'org.projectlombok:lombok'
         implementation "org.postgresql:postgresql:${postgresVersion}"
+        implementation "org.mapstruct:mapstruct:${mapStructVersion}"
+        annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+        implementation "org.springframework.boot:spring-boot-starter-validation"
     }
 }

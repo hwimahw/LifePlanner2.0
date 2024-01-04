@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 20230701-1
+      id: 20230829-1
       author: Irzakhanov Mansur
       changes:
         - createTable:
@@ -13,8 +13,12 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: idf
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
                   name: name
                   type: varchar
                   constraints:
                     nullable: false
-                    unique: true

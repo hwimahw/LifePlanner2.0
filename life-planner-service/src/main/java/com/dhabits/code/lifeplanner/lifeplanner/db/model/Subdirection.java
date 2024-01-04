@@ -27,11 +27,14 @@ public class Subdirection {
     @GeneratedValue(generator = "UUID")
     private UUID id;
 
-    @Column(name = "name")
-    String name;
+    @Column(name = "idf")
+    private Integer idf;
 
-    @Column(name = "parentId")
-    UUID parentId;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "parentIdf")
+    private Integer parentIdf;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "main_direction_id")

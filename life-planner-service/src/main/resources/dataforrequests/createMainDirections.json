@@ -1,0 +1,44 @@
+[
+  {
+    "idf": 1,
+    "name": "MainDirection1",
+    "subdirections":[
+      {
+        "idf": 2,
+        "name":"Subdirection1",
+        "parentIdf":"1"
+      },
+      {
+        "idf": 3,
+        "name":"Subdirection2",
+        "parentIdf":"1"
+      },
+      {
+        "idf": 4,
+        "name":"Subdirection3",
+        "parentIdf":"3"
+      }
+    ]
+  },
+  {
+    "idf": 1,
+    "name": "MainDirection2",
+    "subdirections":[
+      {
+        "idf": 2,
+        "name":"subdirection1",
+        "parentIdf":"1"
+      },
+      {
+        "idf": 3,
+        "name":"Subdirection2",
+        "parentIdf":"1"
+      },
+      {
+        "idf": 4,
+        "name":"Subdirection3",
+        "parentIdf":"3"
+      }
+    ]
+  }
+]

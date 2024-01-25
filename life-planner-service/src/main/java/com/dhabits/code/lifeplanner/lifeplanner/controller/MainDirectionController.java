@@ -17,7 +17,11 @@ public class MainDirectionController implements MainDirectionApi {
 
     @Override
     public ResponseEntity<List<MainDirectionDto>> createMainDirections(@Valid List<MainDirectionDto> mainDirectionDtos) {
-        mainDirectionService.createMainDirections(mainDirectionDtos);
-        return ResponseEntity.ok(mainDirectionDtos);
+        return ResponseEntity.ok(mainDirectionService.createMainDirections(mainDirectionDtos));
+    }
+
+    @Override
+    public ResponseEntity<List<MainDirectionDto>> updateMainDirections(@Valid List<MainDirectionDto> mainDirectionDtos) {
+        return ResponseEntity.ok(mainDirectionService.updateMainDirections(mainDirectionDtos));
     }
 }

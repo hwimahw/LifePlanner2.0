@@ -15,7 +15,10 @@ public interface MainDirectionMapper {
     @Mapping(target = "subdirections", ignore = true)
     MainDirection toMapDirection(MainDirectionDto mapDirectionDto);
 
+    List<MainDirectionDto> toMapDirectionDtoList(Iterable<MainDirection> mapDirection);
+
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "mainDirection", ignore = true)
     Subdirection toSubdirection(SubdirectionDto subdirectionDto);
 
 

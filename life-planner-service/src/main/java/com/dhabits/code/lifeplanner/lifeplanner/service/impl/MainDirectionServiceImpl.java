@@ -57,13 +57,18 @@ public class MainDirectionServiceImpl implements MainDirectionService {
         mainDirection.setName(mainDirectionDto.getName());
         mainDirection.setIdf(mainDirectionDto.getIdf());
         List<SubdirectionDto> subdirectionDtos = mainDirectionDto.getSubdirections();
-        Map<UUID, List<SubdirectionDto>> subdirectionsMap = subdirectionDtos.stream().collect(Collectors.groupingBy(SubdirectionDto::getId, Collectors.toList()));
-        Set<Subdirection> subdirections = mainDirection.getSubdirections();
-        for (Subdirection subdirection : subdirections) {
-            //Группировка (grouping by) была сделана по id, являющемуся уникальным полем
-            SubdirectionDto subdirectionDto = subdirectionsMap.get(subdirection.getId()).get(0);
-            if(subdirectionDto != null) {
-                updateSubDirection(subdirection, subdirectionDto);
+        Map<UUID, List<Subdirection>> subdirectionMap = mainDirection.getSubdirections().stream().collect(Collectors.groupingBy(Subdirection::getId, Collectors.toList()));
+        for (SubdirectionDto subdirectionDto : subdirectionDtos) {
+            if (subdirectionDto.getId() == null) {
+                Subdirection subdirection = mainDirectionMapper.toSubdirection(subdirectionDto);
+                subdirection.setMainDirection(mainDirection);
+                mainDirection.getSubdirections().add(subdirection);
+            } else {
+                List<Subdirection> subdirections = subdirectionMap.get(subdirectionDto.getId());
+                //Группировка (grouping by) была сделана по id, являющемуся уникальным полем
+                if (!subdirections.isEmpty() && subdirections.get(0) != null) {
+                    updateSubDirection(subdirections.get(0), subdirectionDto);
+                }
             }
         }
         mainDirectionsForUpdating.add(mainDirection);
